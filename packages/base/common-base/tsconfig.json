@@ -1,0 +1,10 @@
+{
+  "extends": "@package/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "allowJs": true
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules", "dist"]
+}

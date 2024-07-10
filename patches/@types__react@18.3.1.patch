@@ -1,0 +1,18 @@
+diff --git a/canary.d.ts b/canary.d.ts
+index 91cfb50c8aa187ffaa3d19b793c431956db8eb8e..f5ea5b8ca962ff4bf3d100ae35d1959960533ebc 100644
+--- a/canary.d.ts
++++ b/canary.d.ts
+@@ -28,7 +28,7 @@ import React = require(".");
+ export {};
+ 
+ declare const UNDEFINED_VOID_ONLY: unique symbol;
+-type VoidOrUndefinedOnly = void | { [UNDEFINED_VOID_ONLY]: never };
++export type VoidOrUndefinedOnly = void | { [UNDEFINED_VOID_ONLY]: never };
+ 
+ declare module "." {
+     interface ThenableImpl<T> {
+@@ -161,3 +161,4 @@ declare module "." {
+         bigints: bigint;
+     }
+ }
++

@@ -1,0 +1,8 @@
+{
+  "name": "@package/eslint-config-custom",
+  "devDependencies": {
+    "@react-native/eslint-config": "^0.74.83"
+  },
+  "main": "index.js",
+  "private": true
+}

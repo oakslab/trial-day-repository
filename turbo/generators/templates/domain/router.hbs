@@ -1,0 +1,39 @@
+import {
+  {{camelCase domain}}ListInput,
+  {{camelCase domain}}DeleteInput,
+  {{camelCase domain}}CreateInput,
+  {{camelCase domain}}UpdateInput,
+} from 'common';
+import { {{pascalCase domain}}ListEndpoint } from '../../domains/{{camelCase domain}}/{{kebabCase domain}}-list.endpoint';
+import { router } from '../../trpc';
+import { protectedProcedure } from '../../trpc/procedures';
+import { {{pascalCase domain}}CreateEndpoint } from './{{kebabCase domain}}-create.endpoint';
+import { {{pascalCase domain}}DeleteEndpoint } from './{{kebabCase domain}}-delete.endpoint';
+import { {{pascalCase domain}}UpdateEndpoint } from './{{kebabCase domain}}-update.endpoint';
+
+export const {{camelCase domain}}Router = router({
+  create: protectedProcedure
+    .meta({ requiredPermissions: ['{{camelCase domain}}.create'] })
+    .input({{camelCase domain}}CreateInput)
+    .mutation(
+      {{pascalCase domain}}CreateEndpoint.createEndpoint({{pascalCase domain}}CreateEndpoint)
+    ),
+  list: protectedProcedure
+    .meta({ requiredPermissions: ['{{camelCase domain}}.read'] })
+    .input({{camelCase domain}}ListInput)
+    .query(
+      {{pascalCase domain}}ListEndpoint.createEndpoint({{pascalCase domain}}ListEndpoint)
+    ),
+  update: protectedProcedure
+    .meta({ requiredPermissions: ['{{camelCase domain}}.update'] })
+    .input({{camelCase domain}}UpdateInput)
+    .mutation(
+      {{pascalCase domain}}UpdateEndpoint.createEndpoint({{pascalCase domain}}UpdateEndpoint)
+    ),
+  delete: protectedProcedure
+    .meta({ requiredPermissions: ['{{camelCase domain}}.delete'] })
+    .input({{camelCase domain}}DeleteInput)
+    .mutation(
+      {{pascalCase domain}}DeleteEndpoint.createEndpoint({{pascalCase domain}}DeleteEndpoint)
+    ),
+});

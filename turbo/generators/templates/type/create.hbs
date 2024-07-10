@@ -1,0 +1,8 @@
+import { z } from 'zod';
+import { {{camelCase domain}}InputSchema, {{camelCase domain}}Schema } from './{{kebabCase domain}}.types';
+
+export const {{camelCase domain}}CreateInput = {{camelCase domain}}InputSchema;
+export type {{pascalCase domain}}CreateInputType = z.infer<typeof {{camelCase domain}}CreateInput>;
+
+export const {{camelCase domain}}CreateOutput = {{camelCase domain}}Schema;
+export type {{pascalCase domain}}CreateOutputType = z.infer<typeof {{camelCase domain}}CreateOutput>;

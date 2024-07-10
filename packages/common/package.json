@@ -1,0 +1,17 @@
+{
+  "name": "common",
+  "version": "0.0.0",
+  "dependencies": {
+    "@base/common-base": "workspace:*",
+    "database": "workspace:*"
+  },
+  "devDependencies": {
+    "@package/typescript-config": "workspace:*"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "./src/index.ts",
+  "private": true,
+  "types": "./src/index.ts"
+}

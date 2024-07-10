@@ -1,0 +1,29 @@
+{
+  "name": "database",
+  "version": "0.0.0",
+  "dependencies": {
+    "@prisma/client": "^5.15.0",
+    "prisma": "^5.15.0"
+  },
+  "devDependencies": {
+    "@package/typescript-config": "workspace:*",
+    "prisma-dbml-generator": "^0.12.0"
+  },
+  "main": "./index.ts",
+  "private": true,
+  "scripts": {
+    "config:replace-db": "node ../../tools/db-url-replace.js",
+    "format": "prisma format",
+    "generate": "prisma generate",
+    "local": "docker-compose up -d",
+    "local:remove": "docker-compose down --remove-orphans",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:reset": "prisma migrate reset",
+    "migrate:save": "prisma migrate dev --create-only",
+    "postinstall": "prisma generate",
+    "proxy": "node ../../tools/cloud-sql-proxy",
+    "studio": "prisma studio"
+  },
+  "types": "./index.ts"
+}

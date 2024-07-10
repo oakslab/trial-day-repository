@@ -1,0 +1,31 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "dotEnv": [".env.local", ".env"],
+      "outputs": [
+        "out/**",
+        ".next/**",
+        "!.next/cache/**",
+        "node_modules/.cache/metro/**"
+      ]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "e2e": {},
+    "e2e:watch": {},
+    "emulators": {
+      "cache": false
+    }
+  }
+}

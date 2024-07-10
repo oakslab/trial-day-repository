@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  PENDING
+  BANNED
+  REJECTED
+}
+
+model User {
+  id  String  @id @default(cuid())
+  uid String? @unique // Firebase ID
+
+  firstName String?
+  lastName  String?
+  email     String  @unique
+
+  role   UserRole   @default(USER)
+  status UserStatus @default(PENDING)
+
+  avatarId      String?
+  invitationKey String? @unique
+
+  createdAt  DateTime  @default(now())
+  disabledAt DateTime?
+
+  @@index([uid])
+  // GIN trigram-based index to support ILIKE searches https://www.postgresql.org/docs/current/pgtrgm.html
+  @@index([firstName(ops: raw("gin_trgm_ops")), lastName(ops: raw("gin_trgm_ops")), email(ops: raw("gin_trgm_ops"))], type: Gin, name: "User_search_idx")
+}
+
+model AuditLog {
+  id             Int      @id @default(autoincrement())
+  userEmail      String
+  operation      String
+  timestamp      DateTime
+  userIp         String?
+  accessLevel    String
+  originalUserId String?
+}

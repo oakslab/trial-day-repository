@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "mattpocock.ts-error-translator",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "orta.vscode-twoslash-queries",
+    "prisma.prisma",
+    "ms-azuretools.vscode-docker",
+    "formulahendry.auto-rename-tag"
+  ]
+}

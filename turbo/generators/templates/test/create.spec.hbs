@@ -1,0 +1,31 @@
+import { useTestEnvironment } from '../../../tests/test-environment';
+import { {{pascalCase domain}}CreateEndpoint } from './{{kebabCase domain}}-create.endpoint';
+import { {{pascalCase domain}}Fixtures } from './{{kebabCase domain}}.fixtures';
+
+describe({{pascalCase domain}}CreateEndpoint.name, () => {
+  const { createTestCaller, createTestContext, testUsers, prisma } =
+    useTestEnvironment();
+
+  const {{camelCase domain}}Fixtures = new {{pascalCase domain}}Fixtures(prisma);
+
+  it('should successfully create {{camelCase domain}}', async () => {
+    // arrange
+    const created{{pascalCase domain}} = await {{camelCase domain}}Fixtures.create({});
+    
+    const ctx = createTestContext({});
+    const testCaller = createTestCaller(ctx);
+
+    // act
+    const input = {};
+    const result = await testCaller.{{camelCase domain}}.create(input);
+
+    // assert
+    expect(result.result).toBe('success');
+
+    if (result.result === 'success') {
+      expect(result.data).toEqual({
+        ...created{{pascalCase domain}},
+      });
+    }
+  });
+});

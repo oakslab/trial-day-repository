@@ -1,0 +1,5 @@
+{
+  "name": "@package/jest-config-custom",
+  "main": "index.js",
+  "private": true
+}

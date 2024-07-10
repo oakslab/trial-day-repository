@@ -1,0 +1,54 @@
+import { {{pascalCase domain}}ListOutputType } from 'common';
+import { useTestEnvironment } from '../../../tests/test-environment';
+import { {{pascalCase domain}}ListEndpoint } from './{{kebabCase domain}}-list.endpoint';
+import { {{pascalCase domain}}Fixtures } from './{{kebabCase domain}}.fixtures';
+
+describe({{pascalCase domain}}ListEndpoint.name, () => {
+  const { createTestCaller, createTestContext, testUsers, prisma } =
+    useTestEnvironment();
+
+  const {{camelCase domain}}Fixtures = new {{pascalCase domain}}Fixtures(prisma);
+
+it('should successfully list all {{camelCase domain}}s', async () => {
+    // arrange
+    const pageSize = 10;
+    await {{camelCase domain}}Fixtures.createMany(pageSize * 2 + 5);
+    const ctx = createTestContext({});
+    const testCaller = createTestCaller(ctx);
+
+    let page = 0;
+    let all{{pascalCase domain}}s: {{pascalCase domain}}ListOutputType['items'] = [];
+    let fetched{{pascalCase domain}}s: {{pascalCase domain}}ListOutputType['items'];
+
+    // act
+    do {
+      const result = await testCaller.{{camelCase domain}}.list({
+        filters: {},
+        pageSize,
+        page,
+      });
+
+      expect(all{{pascalCase domain}}s).not.toEqual(null);
+
+      fetched{{pascalCase domain}}s = result.data?.items ?? [];
+      all{{pascalCase domain}}s = all{{pascalCase domain}}s.concat(result.data?.items ?? []);
+      page++;
+    } while (fetched{{pascalCase domain}}s.length === pageSize);
+
+    // assert
+    const expected{{pascalCase domain}}s = await prisma.{{camelCase domain}}.findMany({});
+
+    expect(all{{pascalCase domain}}s).toHaveLength(expected{{pascalCase domain}}s.length);
+
+    expected{{pascalCase domain}}s.forEach((rec) => {
+      expect(all{{pascalCase domain}}s).toContainEqual(
+        expect.objectContaining({
+          id: rec.id,
+          // Please expand assertion:
+          // email: rec.email,
+          // organization: rec.organization
+        }),
+      );
+    });
+  });
+});

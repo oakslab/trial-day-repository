@@ -1,0 +1,21 @@
+import { Result } from '@base/common-base';
+import { {{pascalCase domain}}ListInputType } from 'common';
+import { Service } from 'typedi';
+import { BaseEndpoint, EndpointParam } from '../../lib/base-endpoint';
+import { {{pascalCase domain}}Repository } from './{{kebabCase domain}}.repo';
+
+@Service()
+export class {{pascalCase domain}}ListEndpoint extends BaseEndpoint {
+  constructor(private readonly {{camelCase domain}}Repo: {{pascalCase domain}}Repository) {
+    super();
+  }
+
+  async execute({ input }: EndpointParam<{{pascalCase domain}}ListInputType>) {
+    const { count, items } = await  this.{{camelCase domain}}Repo.search(input);
+
+    return Result.success({
+      count,
+      items,
+    });
+  }
+}

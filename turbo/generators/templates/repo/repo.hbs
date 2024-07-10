@@ -1,0 +1,103 @@
+import { SortDirectionEnum } from '@base/common-base';
+import {
+  {{pascalCase domain}}ListInputType,
+} from 'common';
+import { Prisma } from 'database';
+import { Service } from 'typedi';
+import { TransactionService } from '../../lib/db/transactionService';
+
+@Service()
+export class {{pascalCase domain}}Repository {
+  constructor(readonly transactionService: TransactionService) {}
+  
+  findMany<
+    T extends Prisma.{{pascalCase domain}}FindManyArgs,
+    Result extends Array<Prisma.{{pascalCase domain}}GetPayload<T>>,
+  >(args?: T) {
+    return this.transactionService
+      .current()
+      .{{camelCase domain}}.findMany(args) as Promise<Result>;
+  }
+  
+  findFirst<
+    T extends Prisma.{{pascalCase domain}}FindFirstArgs,
+    Result extends Prisma.{{pascalCase domain}}GetPayload<T> | null,
+  >(args?: T) {
+    return this.transactionService
+      .current()
+      .{{camelCase domain}}.findFirst(args) as unknown as Promise<Result>;
+  }
+  
+  findUnique<
+    T extends Prisma.{{pascalCase domain}}FindUniqueArgs,
+    Result extends Prisma.{{pascalCase domain}}GetPayload<T> | null,
+  >(args: T) {
+    return this.transactionService
+      .current()
+      .{{camelCase domain}}.findUnique(args) as unknown as Promise<Result>;
+  }
+  
+  count<T extends Prisma.{{pascalCase domain}}CountArgs>(args?: T): Promise<number> {
+    return this.transactionService.current().{{camelCase domain}}.count(args);
+  }
+  
+  update<
+    T extends Prisma.{{pascalCase domain}}UpdateArgs,
+    Result extends Prisma.{{pascalCase domain}}GetPayload<T>,
+  >(args: T) {
+    return this.transactionService
+      .current()
+      .{{camelCase domain}}.update(args) as unknown as Promise<Result>;
+  }
+  
+  create<
+    T extends Prisma.{{pascalCase domain}}CreateArgs,
+    Result extends Prisma.{{pascalCase domain}}GetPayload<T>,
+  >(args: T) {
+    return this.transactionService
+      .current()
+      .{{camelCase domain}}.create(args) as unknown as Promise<Result>;
+  }
+  
+  delete<
+    T extends Prisma.{{pascalCase domain}}DeleteArgs,
+    Result extends Prisma.{{pascalCase domain}}GetPayload<T>,
+  >(args: T) {
+    return this.transactionService
+      .current()
+      .{{camelCase domain}}.delete(args) as unknown as Promise<Result>;
+  }
+
+  async findManyAsPagedList(args: Prisma.{{pascalCase domain}}FindManyArgs) {
+    const [count, items] = await Promise.all([
+      this.transactionService.current().{{camelCase domain}}.count({ where: args.where }),
+      this.transactionService.current().{{camelCase domain}}.findMany(args),
+    ]);
+
+    return {
+      count,
+      items,
+    };
+  }
+
+
+  async search({ filters, page, pageSize, orderBy }: {{pascalCase domain}}ListInputType) {
+    const where = this.constructWhere(filters);
+    const defaultOrderBy = { id: SortDirectionEnum.asc } as const;
+    orderBy = orderBy ? { ...defaultOrderBy, ...orderBy } : defaultOrderBy;
+
+    return this.findManyAsPagedList({
+      where,
+      take: pageSize,
+      skip: page * pageSize,
+      orderBy,
+    });
+  }
+
+  private constructWhere(
+    filters:{{pascalCase domain}}ListInputType['filters'] 
+  ): Prisma.{{pascalCase domain}}WhereInput {
+    // Implement the logic based on specific filters
+   return { id: filters.searchTerm };
+  }
+}

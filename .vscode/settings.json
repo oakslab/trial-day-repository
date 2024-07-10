@@ -1,0 +1,30 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "eslint.nodePath": "./node_modules/eslint/lib/api.js",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.format.enable": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.workingDirectories": [
+    "./apps/api",
+    "./apps/web",
+    "./apps/mobile",
+    "./packages/authentication",
+    "./packages/common",
+    "./packages/ui",
+    "./packages/database",
+    "./packages/eslint-config",
+    "./packages/typescript-config",
+    "./packages/base/common-base",
+  ]
+}

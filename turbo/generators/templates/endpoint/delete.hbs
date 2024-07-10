@@ -1,0 +1,29 @@
+import { Result } from '@base/common-base';
+import { {{pascalCase domain}}DeleteInputType } from 'common';
+import { Service } from 'typedi';
+import { BaseEndpoint, EndpointParam } from '../../lib/base-endpoint';
+import { LoggerService } from '../../services';
+import { {{pascalCase domain}}Repository } from './{{kebabCase domain}}.repo';
+
+@Service()
+export class {{pascalCase domain}}DeleteEndpoint extends BaseEndpoint {
+  constructor(
+    private readonly {{camelCase domain}}Repo: {{pascalCase domain}}Repository,
+    private readonly logger: LoggerService,
+  ) {
+    super();
+  }
+
+  async execute({ input }: EndpointParam<{{pascalCase domain}}DeleteInputType>) {
+    const {{camelCase domain}} = await this.{{camelCase domain}}Repo.delete({
+      where: input
+    });
+
+    this.logger.info('{{pascalCase domain}} deleted', {
+      id: input.id,
+      data: {{camelCase domain}},
+    });
+
+    return Result.success({{camelCase domain}});
+  }
+}

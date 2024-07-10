@@ -1,0 +1,12 @@
+name: trialday_repo
+services:
+  trialday-database:
+    image: postgres:latest
+    container_name: trialday-database
+    restart: always
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: reusable_repo
+    ports:
+      - 5432:5432

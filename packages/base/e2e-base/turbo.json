@@ -1,0 +1,6 @@
+{
+  "extends": ["//"],
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["TEST_USER_EMAIL", "TEST_USER_PASSWORD"],
+  "pipeline": {}
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@base/e2e-base",
+  "version": "0.0.0",
+  "dependencies": {
+    "@package/typescript-config": "workspace:*",
+    "@playwright/test": "^1.44.1",
+    "lodash": "^4.17.21",
+    "playwright": "^1.44.1"
+  },
+  "main": "./src/index.ts",
+  "private": true,
+  "types": "./src/index.ts"
+}

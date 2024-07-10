@@ -1,0 +1,39 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  uid String [unique]
+  firstName String
+  lastName String
+  email String [unique, not null]
+  role UserRole [not null, default: 'USER']
+  status UserStatus [not null, default: 'PENDING']
+  avatarId String
+  invitationKey String [unique]
+  createdAt DateTime [default: `now()`, not null]
+  disabledAt DateTime
+}
+
+Table AuditLog {
+  id Int [pk, increment]
+  userEmail String [not null]
+  operation String [not null]
+  timestamp DateTime [not null]
+  userIp String
+  accessLevel String [not null]
+  originalUserId String
+}
+
+Enum UserRole {
+  USER
+  ADMIN
+}
+
+Enum UserStatus {
+  ACTIVE
+  PENDING
+  BANNED
+  REJECTED
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "@package/typescript-config/e2e.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": "./src"
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules", "dist"]
+}

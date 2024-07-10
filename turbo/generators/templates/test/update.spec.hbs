@@ -1,0 +1,44 @@
+import omit from 'lodash/omit';
+import { useTestEnvironment } from '../../../tests/test-environment';
+import { {{pascalCase domain}}CreateEndpoint } from './{{kebabCase domain}}-create.endpoint';
+import { {{pascalCase domain}}Fixtures } from './{{kebabCase domain}}.fixtures';
+
+describe({{pascalCase domain}}CreateEndpoint.name, () => {
+  const { createTestCaller, createTestContext, testUsers, prisma } =
+    useTestEnvironment();
+
+  const {{camelCase domain}}Fixtures = new {{pascalCase domain}}Fixtures(prisma);
+
+  it('should successfully update {{camelCase domain}}', async () => {
+    // arrange
+    const {{camelCase domain}}ToUpdate = await {{camelCase domain}}Fixtures.create({});
+    const updateData = omit(
+      {{pascalCase domain}}Fixtures.of({
+        // Please expand fields for update:
+        // email: {{camelCase domain}}ToUpdate.email,
+        // organization: {{camelCase domain}}ToUpdate.organization
+      }),
+      'someOtherField',
+    );
+
+    const ctx = createTestContext({});
+    const testCaller = createTestCaller(ctx);
+
+    // act
+    const updated{{pascalCase domain}} = await testCaller.{{camelCase domain}}.update({
+      ...{{camelCase domain}}ToUpdate,
+      ...updateData,
+    });
+
+    // assert
+    expect(updated{{pascalCase domain}}.result).toEqual('success');
+    if (updated{{pascalCase domain}}.result === 'success') {
+      expect(
+        omit(updated{{pascalCase domain}}.data, 'someOtherField')
+      ).toEqual({
+      id: {{camelCase domain}}ToUpdate.id,
+      ...updateData,
+      });
+    }
+  });
+});

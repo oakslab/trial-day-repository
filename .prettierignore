@@ -1,0 +1,60 @@
+# Build files
+dist/
+.next/
+.turbo/
+node_modules/
+
+# Config files
+.env
+.env.*
+.husky/
+.prettierignore
+.gitignore
+.nvmrc
+.vscode/
+.npmrc
+
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+pnpm-workspace.yaml
+package-lock.json
+yarn.lock
+*.patch
+.syncpackrc
+
+# Icons and images
+*.svg
+*.gif
+*.jpg
+*.png
+*.sh
+
+# Public browser files
+*.xml
+*.ico
+*.pdf
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Docker
+docker-compose.yaml
+
+# Prisma
+prisma/
+
+# Templates
+*.tmpl
+
+# Handlebars
+*.hbs
+
+# Terraform
+*.tf
+
+# Bash
+*.sh
+
+# Plist
+*.plist

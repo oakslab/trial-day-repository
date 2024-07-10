@@ -1,0 +1,25 @@
+import {
+  pagedListOutputFactory,
+  pagedListInputFactory,
+} from '@base/common-base';
+import { z } from 'zod';
+import { {{camelCase domain}}Schema } from './{{kebabCase domain}}.types';
+
+export const {{camelCase domain}}ListInput = pagedListInputFactory({
+  filters: z.object({
+    {{#ifEquals entityIdType 'cuid'}}
+    searchTerm: z.string()
+      .optional()
+      .transform((val) => val?.trim()),
+    {{/ifEquals}}
+    {{#ifEquals entityIdType 'integer'}}
+    searchTerm: z.number()
+      .optional(),
+    {{/ifEquals}}
+  }),
+  orderBy: ['id'] as const, // Simplified to only include 'id', add more fields as necessary.
+});
+export type {{pascalCase domain}}ListInputType = z.infer<typeof {{camelCase domain}}ListInput>;
+
+export const {{camelCase domain}}ListOutput = pagedListOutputFactory({{camelCase domain}}Schema);
+export type {{pascalCase domain}}ListOutputType = z.infer<typeof {{camelCase domain}}ListOutput>;

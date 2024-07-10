@@ -1,0 +1,30 @@
+import { Result } from '@base/common-base';
+import { {{pascalCase domain}}CreateInputType } from 'common';
+import { Service } from 'typedi';
+import { BaseEndpoint, EndpointParam } from '../../lib/base-endpoint';
+import { LoggerService } from '../../services';
+import { {{pascalCase domain}}Repository } from './{{kebabCase domain}}.repo';
+
+
+@Service()
+export class {{pascalCase domain}}CreateEndpoint extends BaseEndpoint {
+  constructor(
+    private readonly {{camelCase domain}}Repo: {{pascalCase domain}}Repository,
+    private readonly logger: LoggerService,
+  ) {
+    super();
+  }
+
+  async execute({ input }: EndpointParam<{{pascalCase domain}}CreateInputType>) {
+    const {{camelCase domain}} = await this.{{camelCase domain}}Repo.create({
+      data: input
+    });
+
+    this.logger.info('{{pascalCase domain}} created', {
+      id: {{camelCase domain}}.id,
+      data: {{camelCase domain}},
+    });
+
+    return Result.success({{camelCase domain}});
+  }
+}

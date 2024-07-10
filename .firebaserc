@@ -1,0 +1,28 @@
+{
+  "projects": {
+    "default": "reusability-development",
+    "demo": "reusability-demo"
+  },
+  "targets": {
+    "reusability-development": {
+      "hosting": {
+        "web": [
+          "reusability-development-web-IMw1bfGK"
+        ],
+        "admin": [
+          "reusability-development-admin-IMw1bfGK"
+        ]
+      }
+    },
+    "reusability-demo": {
+      "hosting": {
+        "web": [
+          "reusability-demo-web-KuyYdDHs"
+        ],
+        "admin": [
+          "reusability-demo-admin-KuyYdDHs"
+        ]
+      }
+    }
+  }
+}

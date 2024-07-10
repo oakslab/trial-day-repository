@@ -1,0 +1,25 @@
+{
+  "name": "@base/auth-frontend-base",
+  "description": "Authentication for your frontend",
+  "version": "0.0.0",
+  "author": "",
+  "dependencies": {
+    "@base/common-base": "workspace:*",
+    "@firebase/app": "^0.10.2",
+    "@firebase/auth": "^1.7.2",
+    "common": "workspace:*",
+    "database": "workspace:*",
+    "firebase": "^10.6.0",
+    "firebase-admin": "^12.0.0",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@package/typescript-config": "workspace:*",
+    "@types/lodash": "^4.17.1",
+    "@types/uuid": "^9.0.8",
+    "kill-port": "^2.0.1"
+  },
+  "license": "MIT",
+  "main": "./src/index.ts"
+}

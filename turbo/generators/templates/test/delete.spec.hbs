@@ -1,0 +1,25 @@
+import { useTestEnvironment } from '../../../tests/test-environment';
+import { {{pascalCase domain}}DeleteEndpoint } from './{{kebabCase domain}}-delete.endpoint';
+import { {{pascalCase domain}}Fixtures } from './{{kebabCase domain}}.fixtures';
+
+describe({{pascalCase domain}}DeleteEndpoint.name, () => {
+  const { createTestCaller, createTestContext, testUsers, prisma } =
+    useTestEnvironment();
+
+  const {{camelCase domain}}Fixtures = new {{pascalCase domain}}Fixtures(prisma);
+
+  it('should successfully delete {{camelCase domain}}', async () => {
+    // arrange
+    const created{{pascalCase domain}} = await {{camelCase domain}}Fixtures.create({});
+
+    const ctx = createTestContext({});
+    const testCaller = createTestCaller(ctx);
+
+    // act
+    const input = { id: created{{pascalCase domain}}.id };
+    const result = await testCaller.{{camelCase domain}}.delete(input);
+
+    // assert
+    expect(result.result).toBe('success');
+  });
+});

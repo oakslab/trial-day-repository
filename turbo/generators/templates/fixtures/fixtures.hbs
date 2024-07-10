@@ -1,0 +1,35 @@
+import { validateNodeEnvTesting } from '@base/common-base';
+import { {{pascalCase domain}} } from 'database';
+import times from 'lodash/times';
+import { PrismaMock } from '../../../tests/mocks/mocked-prisma';
+
+export class {{pascalCase domain}}Fixtures {
+  constructor(private readonly prisma: PrismaMock) {}
+
+  static of(partialData?: Partial<{{pascalCase domain}}>): Omit<{{pascalCase domain}}, 'id'> {
+    validateNodeEnvTesting();
+    return {
+      ...partialData,
+    };
+  }
+
+  async createMany(count: number, data?: Partial<{{pascalCase domain}}>) {
+    validateNodeEnvTesting();
+
+    const dataCreated = times(count, () => {{pascalCase domain}}Fixtures.of(data));
+
+    return this.prisma.{{camelCase domain}}.createManyAndReturn({
+      data: dataCreated,
+    });
+  }
+
+  async create(data?: Partial<{{pascalCase domain}}>) {
+    validateNodeEnvTesting();
+
+    const dataCreated = {{pascalCase domain}}Fixtures.of(data);
+
+    return this.prisma.{{camelCase domain}}.create({
+      data: dataCreated,
+    });
+  }
+}

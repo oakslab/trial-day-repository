@@ -1,0 +1,21 @@
+import z from 'zod';
+
+export const {{camelCase domain}}Schema = z.object({
+  {{#ifEquals entityIdType 'cuid'}}
+  id: z.string(),
+  {{/ifEquals}}
+  {{#ifEquals entityIdType 'integer'}}
+  id: z.number(),
+  {{/ifEquals}}
+});
+
+export const {{camelCase domain}}InputSchema = z.object({
+  {{#ifEquals entityIdType 'cuid'}}
+  id: z.string().optional(),
+  {{/ifEquals}}
+  {{#ifEquals entityIdType 'integer'}}
+  id: z.number().optional(),
+  {{/ifEquals}}
+});
+
+export type {{pascalCase domain}} = z.infer<typeof {{camelCase domain}}Schema>;

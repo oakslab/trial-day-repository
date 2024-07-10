@@ -1,0 +1,32 @@
+import { Result } from '@base/common-base';
+import { {{pascalCase domain}}UpdateInputType } from 'common';
+import { Service } from 'typedi';
+import { BaseEndpoint, EndpointParam } from '../../lib/base-endpoint';
+import { LoggerService } from '../../services';
+import { {{pascalCase domain}}Repository } from './{{kebabCase domain}}.repo';
+
+@Service()
+export class {{pascalCase domain}}UpdateEndpoint extends BaseEndpoint {
+  constructor(
+    private readonly logger: LoggerService,
+    private readonly {{camelCase domain}}Repo: {{pascalCase domain}}Repository,
+  ) {
+    super();
+  }
+
+  async execute({ input }: EndpointParam<{{pascalCase domain}}UpdateInputType>) {
+    const { id, ...data } = input;
+
+    const updated{{pascalCase domain}} = await this.{{camelCase domain}}Repo.update({
+      where: { id },
+      data,
+    });
+
+    this.logger.info('{{pascalCase domain}} updated', {
+      id: updated{{pascalCase domain}}.id,
+      data: updated{{pascalCase domain}},
+    });
+
+    return Result.success(updated{{pascalCase domain}});
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "extends": "@package/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/**/*.spec.ts"
+  ],
+  "exclude": ["node_modules"]
+}

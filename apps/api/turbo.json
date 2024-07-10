@@ -1,0 +1,10 @@
+{
+  "extends": ["//"],
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dotEnv": [".env.local"],
+      "env": ["EMAIL_PROVIDER", "POSTMARK_API_KEY", "SENDGRID_API_KEY"]
+    }
+  }
+}

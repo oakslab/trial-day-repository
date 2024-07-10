@@ -1,0 +1,14 @@
+import { z } from 'zod';
+import { {{camelCase domain}}Schema } from './{{kebabCase domain}}.types';
+
+export const {{camelCase domain}}DeleteInput = z.object({
+  {{#ifEquals entityIdType 'cuid'}}
+  id: z.string(),
+  {{else}}
+  id: z.number(),
+  {{/ifEquals}}
+});
+export type {{pascalCase domain}}DeleteInputType = z.infer<typeof {{camelCase domain}}DeleteInput>;
+
+export const {{camelCase domain}}DeleteOutput = {{camelCase domain}}Schema;
+export type {{pascalCase domain}}DeleteOutputType = z.infer<typeof {{camelCase domain}}DeleteOutput>;

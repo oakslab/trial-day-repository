@@ -1,0 +1,15 @@
+{
+  "emulators": {
+    "auth": {
+      "port": 3002,
+      "host": "0.0.0.0"
+    },
+    "hosting": {
+      "port": 4000
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  }
+}

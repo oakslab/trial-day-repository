@@ -1,0 +1,22 @@
+{
+  "name": "@base/auth-backend-base",
+  "description": "Authentication for your backend",
+  "version": "0.0.0",
+  "author": "",
+  "dependencies": {
+    "@base/common-base": "workspace:*",
+    "firebase": "^10.6.0",
+    "firebase-admin": "^12.0.0"
+  },
+  "devDependencies": {
+    "@package/typescript-config": "workspace:*",
+    "kill-port": "^2.0.1"
+  },
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "scripts": {
+    "e2e:serve": "firebase emulators:start --only auth --project=reusability-development",
+    "emulators": "kill-port 3002 4000 && firebase emulators:start --only auth --export-on-exit .emulator --import .emulator --project=reusability-development",
+    "emulators:exec": "firebase emulators:exec --only auth --project=reusability-development"
+  }
+}

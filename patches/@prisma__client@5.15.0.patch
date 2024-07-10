@@ -1,0 +1,24 @@
+diff --git a/package.json b/package.json
+index ec5ea169e22e84524bd10a91789f53942dc838da..6aa03960486e0f21b95707c14100e1f757dc1544 100644
+--- a/package.json
++++ b/package.json
+@@ -42,7 +42,8 @@
+         "edge-light": "./default.js",
+         "workerd": "./default.js",
+         "worker": "./default.js",
+-        "browser": "./index-browser.js"
++        "browser": "./index-browser.js",
++        "default": "./default.js"
+       },
+       "import": {
+         "types": "./default.d.ts",
+@@ -50,7 +51,8 @@
+         "edge-light": "./default.js",
+         "workerd": "./default.js",
+         "worker": "./default.js",
+-        "browser": "./index-browser.js"
++        "browser": "./index-browser.js",
++        "default": "./default.js"
+       },
+       "default": "./default.js"
+     },
