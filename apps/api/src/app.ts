@@ -3,6 +3,7 @@ import { userRouter } from './domains/user/user.router';
 import { authenticationRouter } from './routers/authentication/authentication.router';
 import { examplesRouter } from './routers/examples/examples.router';
 import { healthRouter } from './routers/health/health.router';
+import { postRouter } from './domains/post/post.router';
 // turbo-generator:placeholder:app:imports
 import { router } from './trpc';
 
@@ -11,6 +12,7 @@ export const appRouter = router({
   examples: examplesRouter,
   authentication: authenticationRouter,
   user: userRouter,
+  post: postRouter,
   // turbo-generator:placeholder:app:router
 });
 

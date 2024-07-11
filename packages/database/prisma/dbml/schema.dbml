@@ -14,6 +14,8 @@ Table User {
   invitationKey String [unique]
   createdAt DateTime [default: `now()`, not null]
   disabledAt DateTime
+  posts Post [not null]
+  likes Likes [not null]
 }
 
 Table AuditLog {
@@ -24,6 +26,26 @@ Table AuditLog {
   userIp String
   accessLevel String [not null]
   originalUserId String
+}
+
+Table Post {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  content String [not null]
+  author User
+  userId String
+  Likes Likes [not null]
+}
+
+Table Likes {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User
+  userId String
+  post Post
+  postId String
 }
 
 Enum UserRole {
@@ -37,3 +59,9 @@ Enum UserStatus {
   BANNED
   REJECTED
 }
+
+Ref: Post.userId > User.id
+
+Ref: Likes.userId > User.id
+
+Ref: Likes.postId > Post.id
