@@ -76,9 +76,7 @@ Click on any of the links below to access other guides:
 - [Tools Guide](/tools/README.md)
 - [Infrastructure Guide](infra/README.md)
 
-### Tracing setup
-
-#### Domain Code Generator Guide (For API)
+### Domain Code Generator Guide (For API)
 
 **How to Use:**
 
