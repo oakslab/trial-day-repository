@@ -48,7 +48,7 @@
 
 4. Make sure you have latest migrations on your database. Run `pnpm run --filter=database migrate:dev` in the root directory. This will run all the migrations to your local database.
 
-5. Run `pnpm run build` in the root directory to check
+5. Run `pnpm run build` in the root directory and check that the app builds successfully.
 
 6. Run `pnpm run dev` in the root directory to start the application.
 
