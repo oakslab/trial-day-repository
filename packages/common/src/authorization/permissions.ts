@@ -9,7 +9,7 @@ import { UserRole } from '../../../database';
 // Keep the highest level of permissions at the top (for seeds to work properly)
 export const permissionRoleMapping: RoleToPermissionsMapping = {
   [UserRole.ADMIN]: ['*'],
-  [UserRole.USER]: ['self.*'],
+  [UserRole.USER]: ['self.*', 'post.*'],
 };
 
 // ---------------------------------------------------------------

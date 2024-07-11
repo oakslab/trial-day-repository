@@ -48,14 +48,12 @@
   },
   "engines": {
     "node": ">= 18.0.0",
-    "pnpm": ">= 9.1.0",
     "npm": "use-pnpm",
     "yarn": "use-pnpm"
   },
   "lint-staged": {
     "*": "prettier --write"
   },
-  "packageManager": "pnpm@9.1.0",
   "pnpm": {
     "patchedDependencies": {
       "@types/react@18.3.1": "patches/@types__react@18.3.1.patch",
