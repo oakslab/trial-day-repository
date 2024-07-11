@@ -24,7 +24,7 @@
 
 - PostgreSQL Database
   - Docker is required for this step!
-  - Run `npm run local -w database` will download and run local postgreSQL database for you.
+  - Run `pnpm run --filter=database local` will download and run local postgreSQL database for you.
 
 ### Installation
 
