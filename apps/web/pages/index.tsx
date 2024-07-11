@@ -1,22 +1,14 @@
-import {
-  PermissionGuard,
-  useAuth,
-  usePermission,
-} from '@base/auth-frontend-base';
 import Head from 'next/head';
 import { useState } from 'react';
 
 import { trpc } from '@base/frontend-utils-base';
-import { Alert, Button, Grid, Stack, Typography } from '@base/ui-base/ui';
-import { Add } from '@base/ui-base/icons';
+import { Button, Grid, Stack, Typography } from '@base/ui-base/ui';
 
 import { MainLayout } from '../components/layout/main-layout';
 import { AddPostModal } from '../components/post/add-post-modal';
 import { SinglePost } from '../components/post/single-post';
 
 function PageIndex() {
-  const { userProfile, user } = useAuth();
-  const hasPermissionForUser = usePermission(['user.*', 'auditLog.*']);
   const [openPost, setOpenPost] = useState(false);
 
   const { data, isInitialLoading } = trpc.post.list.useQuery({
@@ -29,8 +21,6 @@ function PageIndex() {
   const togglePostModal = () => {
     setOpenPost((prev) => !prev);
   };
-
-  console.log({ data, isInitialLoading });
 
   return (
     <MainLayout>
