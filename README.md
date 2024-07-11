@@ -28,13 +28,7 @@
 
 ### Installation
 
-1. Reach out @ugurek or @vlafa or @kuba or @Durisvk to get access to Google Cloud Platform.
-
-   - Run `gcloud auth login` to login to Google Cloud Platform, and use the email that was added to project to login.
-
-2. Run following command to get authorization for the project locally `gcloud auth application-default login` and use the same email again to login.
-
-3. To install dependencies, run `pnpm install` in the root directory.
+1. To install dependencies, run `pnpm install` in the root directory.
 
    - To run some package script alternatively to `npm npx`
      - Just use `pnpm dlx`
@@ -44,24 +38,33 @@
      - `pnpm add -D <pkg>` to install package as dev dependency
      - `pnpm add -g <pkg>` to install package globally
 
-4. To download local dependencies run `pnpm run config local` in the root directory.
+2. Ask tech lead to provide missing configuration files (`gcp-service-account.json` & `firebase-config.json`) and copy them to following paths:
 
-5. Make sure you have latest migrations on your database. Run `pnpm run --filter=database migrate:dev` in the root directory. This will run all the migrations to your local database.
+   - `./apps/api/gcp-service-account.json`
+   - `./packages/base/auth-backend-base/gcp-service-account.json`
+   - `./packages/base/auth-frontend-base/firebase-config.json`
+
+3. Copy `./packages/database/.env.local` to `./packages/database/.env`
+
+4. Make sure you have latest migrations on your database. Run `pnpm run --filter=database migrate:dev` in the root directory. This will run all the migrations to your local database.
+
+5. Run `pnpm run build` in the root directory to check
 
 6. Run `pnpm run dev` in the root directory to start the application.
 
    - This will run following ports on your local machine:
      - 3000: Frontend - Web
-     - 3003: Frontend - Admin
-     - 3004: Frontend - Examples
      - 3001: Backend
      - 3002: Firebase Authentication
      - 4000: Firebase Emulator
      - 5432: PostgreSQL Database (login: `prisma`, password: `password`, database: `reusable_repo`)
 
 7. Seed the DB & Firebase: `pnpm run --filter=api seed`
+
    - In order to seed Firebase users on local, emulators must be running (part of previous step)
    - Firebase passwords are same as email by default. In case of existing Firebase user, passwords are NOT overwritten
+
+8. Run the web app on [http://localhost:3000](http://localhost:3000) in browser and use `vladimir.rehor+user@oakslab.com` / `vladimir.rehor+user@oakslab.com` credentials to log in.
 
 ### Other Guides
 
@@ -74,42 +77,6 @@ Click on any of the links below to access other guides:
 - [Infrastructure Guide](infra/README.md)
 
 ### Tracing setup
-
-#### GCP (trace agent)
-
-Trace agent doesn't require any specific configuration within code. Dependency will be installed with `pnpm i`. Now keep in mind tracing should not be enabled for local usually, you can control this with `ENABLE_TRACING` [environment variable](/apps/api/.env.local).
-Also don't forget to add `GOOGLE_CLOUD_PROJECT=""` env var
-
-> Note: trace explorer might need to be enabled on [this link](https://console.cloud.google.com/traces/list)
-
-#### Sentry setup
-
-We use regular tracking and also `browserTracingIntegration` which enables tracing similar to GCP trace agent. For web it works out of the box just by adding this integration then in [tracingMiddleware](/apps/api/src/middlewares/tracingMiddleware.ts) we derive FE `tracing_id` from the request and pass it to API sentry to continue trace under same span. We pass same `trace_id` even in GCP trace agent.
-
-More details about [sentry distributed tracing](https://docs.sentry.io/product/sentry-basics/concepts/tracing/distributed-tracing/)
-
-Sentry related `.env` variables
-
-```
-ENVIRONMENT="" // used to track environment within sentry
-SENTRY_DSN=""
-SENTRY_ORG=""
-SENTRY_PROJECT=""
-SENTRY_AUTH_TOKEN="" // Token handling sourcemap upload during CI build phase
-SENTRY_TRACES_SAMPLE_RATE=0 // controls profiler tracking rate (1 or 0)
-SENTRY_APP="api" // app name to distinguish logs within sentry project (follows your apps/ directory)
-```
-
-1. Setup your sentry organization for the project and then create 1 project within the sentry
-2. Go to project settings => **Client Keys (DSN)** and there is your `SENTRY_DSN`
-3. Go to project settings => Auth tokens and create token which is your `SENTRY_AUTH_TOKEN` (don't commit this, just keep it in secrets)
-4. Adjust env vars according to your sentry project
-5. Run `npx @sentry/wizard@latest -i nextjs` and go through wizard (you have to do this for every application in `/apps/` folder)
-6. Remove generated `.sentryclirc` and `sentry.edge.config.ts` (we don't use edge features)
-7. For FE applications keep `sentry.server.config.ts` empty (it has to be in the project unfortunately) and replace `sentry.client.config.ts` with our [config file](/apps/web/sentry.client.config.ts)
-8. Repeat step 7. for API (just opposite files)
-
-> For debugging sentry you need to enable `debug: true` in desired config files (where `sentry.init()` happens)
 
 #### Domain Code Generator Guide (For API)
 
